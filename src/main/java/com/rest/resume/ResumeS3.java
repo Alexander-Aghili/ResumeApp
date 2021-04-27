@@ -47,6 +47,7 @@ public class ResumeS3 {
 			      .object(getFileName(filepath))
 			      .filename(filepath)
 			      .build());
+			return;
 		} catch (InvalidKeyException | ErrorResponseException | InsufficientDataException | InternalException
 				| InvalidResponseException | NoSuchAlgorithmException | ServerException | XmlParserException
 				| IllegalArgumentException | IOException e) {
@@ -61,13 +62,13 @@ public class ResumeS3 {
 		return filepath.substring(filepath.lastIndexOf("\\") + 1);
 	}
 	
-	public void downloadResume(String filepath) {
+	public void downloadResume(String filename) {
 		try {
 			minioClient.downloadObject(
 					  DownloadObjectArgs.builder()
 					  .bucket("resumes")
-					  .object(getFileName(filepath))
-					  .filename(filepath)
+					  .object(filename)
+					  .filename(filename)
 					  .build());
 		} catch (InvalidKeyException | ErrorResponseException | InsufficientDataException | InternalException
 				| InvalidResponseException | NoSuchAlgorithmException | ServerException | XmlParserException
